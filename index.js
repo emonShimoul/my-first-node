@@ -17,13 +17,30 @@ const users = [
 ]
 
 app.get('/users', (req, res) => {
-    res.send(users);
+    // console.log(req.query.search);
+    const search = req.query.search;
+    // use query parameter
+    if(search){
+        const searchResult = users.filter(user => user.name.toLowerCase().includes(search));
+        res.send(searchResult);
+    }
+    else{
+        res.send(users);
+    }
 });
 
 app.get('/users/:id', (req, res) => {
     const id = req.params.id;
     const user = users[id];
     res.send(user);
+});
+
+app.get('/fruits', (req, res) => {
+    res.send(['mango', 'orange', 'apple', 'banana']);
+});
+
+app.get('/fruits/mangoes/fazli', (req, res) => {
+    res.send("Yummy Yummy Mangoes !!");
 })
 
 app.listen(port, () => {
