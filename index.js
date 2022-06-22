@@ -2,7 +2,10 @@ const express = require('express');
 const cors = require('cors');
 const app = express();
 
+// handle the cors error
 app.use(cors());
+// convert the string data to json
+app.use(express.json());
 
 const port = process.env.PORT || 5000;
 
@@ -35,8 +38,12 @@ app.get('/users', (req, res) => {
 
 // app.METHOD
 app.post('/users', (req, res) => {
-    console.log('hitting the post');
-    res.send('post submitted');
+    console.log('hitting the post', req.body);
+    const newUser = req.body;
+    newUser.id = users.length;
+    users.push(newUser);
+    // res.send(JSON.stringify(newUser));
+    res.json(newUser);
 })
 
 // dynamic api
