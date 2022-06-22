@@ -33,6 +33,13 @@ app.get('/users', (req, res) => {
     }
 });
 
+// app.METHOD
+app.post('/users', (req, res) => {
+    console.log('hitting the post');
+    res.send('post submitted');
+})
+
+// dynamic api
 app.get('/users/:id', (req, res) => {
     const id = req.params.id;
     const user = users[id];
